@@ -112,7 +112,7 @@
     -moz-osx-font-smoothing: grayscale;
   }
   
-  /* Dev.to-inspired heading typography */
+  /* Clean heading typography */
   h1, h2, h3, h4, h5, h6 {
     @apply font-bold text-gray-900 dark:text-gray-100 mb-6 pt-2;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -172,7 +172,7 @@
     @apply border-gray-200 dark:border-gray-700;
   }
 
-  /* Dev.to-inspired paragraph and text typography */
+  /* Clean paragraph and text typography */
   p, hr, pre, dl {
     @apply mb-6;
     line-height: 1.7;
@@ -200,7 +200,7 @@
     margin-top: 0;
   }
   
-  /* Dev.to-style code blocks and syntax highlighting */
+  /* Clean code blocks and syntax highlighting */
   code {
     background: rgb(248, 249, 250);
     border: 1px solid rgb(229, 231, 235);
@@ -218,7 +218,7 @@
     color: rgb(248, 113, 113);
   }
   
-  /* Enhanced pre blocks with dev.to styling */
+  /* Enhanced pre blocks with clean styling */
   pre {
     background: rgb(248, 249, 250);
     border: 1px solid rgb(229, 231, 235);
@@ -275,7 +275,7 @@
     color: rgb(156, 163, 175);
   }
 
-  /* Dev.to-style syntax highlighting classes */
+  /* Clean syntax highlighting classes */
   .highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kt { color: rgb(168, 85, 247); font-weight: 600; } /* Keywords */
   .highlight .s, .highlight .s1, .highlight .s2, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .se, .highlight .sh, .highlight .si, .highlight .sx { color: rgb(34, 197, 94); } /* Strings */
   .highlight .c, .highlight .c1, .highlight .cm, .highlight .cp, .highlight .cs { color: rgb(107, 114, 128); font-style: italic; } /* Comments */
@@ -305,7 +305,7 @@
     text-align: center;
   }
   
-  /* Dev.to-style blockquote */
+  /* Clean blockquote styling */
   blockquote {
     @apply text-lg text-gray-700 dark:text-gray-300 italic border-l-4 border-blue-500 pl-6 mb-6;
     line-height: 1.6;
@@ -321,7 +321,7 @@
     border-left-color: rgb(59, 130, 246);
   }
   
-  /* Dev.to-style list typography */
+  /* Clean list typography */
   ul, ol {
     @apply mb-6 ml-6;
     line-height: 1.7;
@@ -404,7 +404,7 @@
     @apply text-gray-900 dark:text-gray-100;
   }
   
-  /* Dev.to-style content typography and links */
+  /* Clean content typography and links */
   #content {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     line-height: 1.6;
@@ -472,7 +472,7 @@
     @apply mb-3;
   }
   
-  /* Dev.to-style alert boxes */
+  /* Clean alert boxes */
   #content .alert-box {
     border: 1px solid;
     border-radius: 0.5rem;
@@ -514,7 +514,7 @@
     opacity: 0.8;
   }
 
-  /* Alert variants with dev.to-style colors */
+  /* Alert variants with clean colors */
   #content .alert-box.warning {
     background: rgb(254, 252, 232);
     border-color: rgb(251, 191, 36);
@@ -634,7 +634,7 @@
     font-weight: 700;
   }
 
-  /* Dev.to-style prose typography */
+  /* Clean prose typography */
   .prose-enhanced {
     max-width: none;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -684,7 +684,7 @@
     color: rgb(209, 213, 219);
   }
 
-  /* Dev.to-style table of contents */
+  /* Clean table of contents styling */
   #content .table-of-contents {
     background: rgb(248, 249, 250);
     border: 1px solid rgb(229, 231, 235);
@@ -743,7 +743,7 @@
     line-height: 1.5;
   }
 
-  /* Dev.to-style description text */
+  /* Clean description text styling */
   #content .description {
     @apply text-gray-600 dark:text-gray-300 text-lg;
     line-height: 1.6;
