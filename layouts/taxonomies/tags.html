@@ -15,113 +15,114 @@
 </div>
 
 <section class="py-10">
-  {{ if .Site.Params.tagCloud }}
-    <!-- Tags Word Cloud -->
-    <div class="tags-wordcloud-organic">
-      {{ $maxCount := 0 }}
-      {{ $minCount := 999999 }}
-      {{ $colors := slice "blue" "green" "purple" "red" "yellow" "indigo" "pink" "gray" "orange" "teal" "cyan" "emerald" "rose" "violet" "amber" }}
+  <!-- Tags Word Cloud -->
+  <div class="tags-wordcloud-container">
+    {{ $maxCount := 0 }}
+    {{ $minCount := 999999 }}
+    {{ $totalTags := 0 }}
+    
+    <!-- Enhanced color palette with better distribution -->
+    {{ $colorSets := slice 
+        (dict "light" "text-blue-500" "dark" "text-blue-400" "weight" "font-semibold")
+        (dict "light" "text-emerald-600" "dark" "text-emerald-400" "weight" "font-medium")
+        (dict "light" "text-purple-600" "dark" "text-purple-400" "weight" "font-bold")
+        (dict "light" "text-rose-500" "dark" "text-rose-400" "weight" "font-medium")
+        (dict "light" "text-amber-600" "dark" "text-amber-400" "weight" "font-semibold")
+        (dict "light" "text-indigo-600" "dark" "text-indigo-400" "weight" "font-bold")
+        (dict "light" "text-pink-500" "dark" "text-pink-400" "weight" "font-medium")
+        (dict "light" "text-teal-600" "dark" "text-teal-400" "weight" "font-semibold")
+        (dict "light" "text-orange-500" "dark" "text-orange-400" "weight" "font-medium")
+        (dict "light" "text-violet-600" "dark" "text-violet-400" "weight" "font-bold")
+        (dict "light" "text-cyan-600" "dark" "text-cyan-400" "weight" "font-medium")
+        (dict "light" "text-lime-600" "dark" "text-lime-400" "weight" "font-semibold")
+    }}
+    
+    <!-- First pass: calculate statistics -->
+    {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
+      {{ $count := len $taxonomy.Pages }}
+      {{ $totalTags = add $totalTags 1 }}
+      {{ if gt $count $maxCount }}
+        {{ $maxCount = $count }}
+      {{ end }}
+      {{ if lt $count $minCount }}
+        {{ $minCount = $count }}
+      {{ end }}
+    {{ end }}
+    
+    <!-- Second pass: render tags with improved algorithm -->
+    {{ $tagIndex := 0 }}
+    {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
+      {{ $count := len $taxonomy.Pages }}
       
-      <!-- First pass: find min and max tag counts -->
-      {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
-        {{ $count := len $taxonomy.Pages }}
-        {{ if gt $count $maxCount }}
-          {{ $maxCount = $count }}
-        {{ end }}
-        {{ if lt $count $minCount }}
-          {{ $minCount = $count }}
-        {{ end }}
+      <!-- Improved size calculation with logarithmic scaling -->
+      {{ $logWeight := 0 }}
+      {{ if gt $maxCount $minCount }}
+        {{ $ratio := div (float (sub $count $minCount)) (float (sub $maxCount $minCount)) }}
+        {{ $logWeight = mul (math.Log (add $ratio 0.1)) 0.5 }}
+        {{ $logWeight = add $logWeight 1 }}
+        {{ if lt $logWeight 0 }}{{ $logWeight = 0.2 }}{{ end }}
+        {{ if gt $logWeight 1 }}{{ $logWeight = 1 }}{{ end }}
+      {{ else }}
+        {{ $logWeight = 0.5 }}
       {{ end }}
       
-      <!-- Create sorted tags by count for better placement -->
-      {{ $tagsList := slice }}
-      {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
-        {{ $count := len $taxonomy.Pages }}
-        {{ $tagsList = $tagsList | append (dict "name" $name "count" $count "taxonomy" $taxonomy) }}
+      <!-- Map to size classes with better distribution -->
+      {{ $sizeClass := "text-sm" }}
+      {{ $baseWeight := "font-normal" }}
+      {{ if ge $logWeight 0.9 }}
+        {{ $sizeClass = "text-5xl" }}
+        {{ $baseWeight = "font-black" }}
+      {{ else if ge $logWeight 0.8 }}
+        {{ $sizeClass = "text-4xl" }}
+        {{ $baseWeight = "font-extrabold" }}
+      {{ else if ge $logWeight 0.7 }}
+        {{ $sizeClass = "text-3xl" }}
+        {{ $baseWeight = "font-bold" }}
+      {{ else if ge $logWeight 0.6 }}
+        {{ $sizeClass = "text-2xl" }}
+        {{ $baseWeight = "font-bold" }}
+      {{ else if ge $logWeight 0.5 }}
+        {{ $sizeClass = "text-xl" }}
+        {{ $baseWeight = "font-semibold" }}
+      {{ else if ge $logWeight 0.4 }}
+        {{ $sizeClass = "text-lg" }}
+        {{ $baseWeight = "font-medium" }}
+      {{ else if ge $logWeight 0.3 }}
+        {{ $sizeClass = "text-base" }}
+        {{ $baseWeight = "font-medium" }}
+      {{ else }}
+        {{ $sizeClass = "text-sm" }}
+        {{ $baseWeight = "font-normal" }}
       {{ end }}
-      {{ $sortedTags := sort $tagsList "count" "desc" }}
       
-      <!-- Render tags with organic sizing and positioning -->
-      {{ range $index, $tag := $sortedTags }}
-        {{ $count := $tag.count }}
-        {{ $name := $tag.name }}
-        {{ $taxonomy := $tag.taxonomy }}
-        
-        <!-- Calculate size based on logarithmic scale for better variation -->
-        {{ $logMax := math.Log $maxCount }}
-        {{ $logCurrent := math.Log $count }}
-        {{ $percentage := 0 }}
-        {{ if gt $logMax 0 }}
-          {{ $percentage = div (mul $logCurrent 100) $logMax }}
-        {{ else }}
-          {{ $percentage = 50 }}
-        {{ end }}
-        
-        <!-- More dramatic size differences -->
-        {{ $fontSize := "1rem" }}
-        {{ $fontWeight := "400" }}
-        {{ if ge $percentage 90 }}
-          {{ $fontSize = "4rem" }}
-          {{ $fontWeight = "900" }}
-        {{ else if ge $percentage 80 }}
-          {{ $fontSize = "3.5rem" }}
-          {{ $fontWeight = "800" }}
-        {{ else if ge $percentage 70 }}
-          {{ $fontSize = "3rem" }}
-          {{ $fontWeight = "700" }}
-        {{ else if ge $percentage 60 }}
-          {{ $fontSize = "2.5rem" }}
-          {{ $fontWeight = "600" }}
-        {{ else if ge $percentage 50 }}
-          {{ $fontSize = "2rem" }}
-          {{ $fontWeight = "600" }}
-        {{ else if ge $percentage 40 }}
-          {{ $fontSize = "1.75rem" }}
-          {{ $fontWeight = "500" }}
-        {{ else if ge $percentage 30 }}
-          {{ $fontSize = "1.5rem" }}
-          {{ $fontWeight = "500" }}
-        {{ else if ge $percentage 20 }}
-          {{ $fontSize = "1.25rem" }}
-          {{ $fontWeight = "400" }}
-        {{ else }}
-          {{ $fontSize = "1rem" }}
-          {{ $fontWeight = "400" }}
-        {{ end }}
-        
-        <!-- Select color -->
-        {{ $colorIndex := mod $index (len $colors) }}
-        {{ $color := index $colors $colorIndex }}
-        
-        <!-- Create organic positioning with CSS custom properties -->
-        {{ $rotation := sub (mod (mul $index 17) 7) 3 }}
-        {{ $marginTop := mod (mul $index 23) 40 }}
-        {{ $marginLeft := mod (mul $index 31) 30 }}
-        
-        <span class="tag-organic" 
-              style="font-size: {{ $fontSize }}; font-weight: {{ $fontWeight }}; margin-top: {{ $marginTop }}px; margin-left: {{ $marginLeft }}px; transform: rotate({{ $rotation }}deg);"
-              data-color="{{ $color }}"
-              data-count="{{ $count }}">
-          <a href="{{ "/tags/" | relLangURL }}{{ $name | urlize }}" 
-             class="tag-organic-link text-{{ $color }}-600 dark:text-{{ $color }}-400"
-             title="{{ $name }} ({{ $count }} {{ if eq $count 1 }}post{{ else }}posts{{ end }})">
-            {{ $name }}
-          </a>
-        </span>
+      <!-- Color selection with better distribution -->
+      {{ $colorIndex := mod (add $tagIndex (len $name)) (len $colorSets) }}
+      {{ $colorSet := index $colorSets $colorIndex }}
+      {{ $lightColor := $colorSet.light }}
+      {{ $darkColor := $colorSet.dark }}
+      {{ $colorWeight := $colorSet.weight }}
+      
+      <!-- Use color weight if base weight is normal, otherwise use base weight -->
+      {{ $finalWeight := $baseWeight }}
+      {{ if eq $baseWeight "font-normal" }}
+        {{ $finalWeight = $colorWeight }}
       {{ end }}
-    </div>
-  {{ else }}
-    <!-- Original Tags List Layout -->
-    <ul class="taxonomy-list">
-      {{ range $index, $pages := .Pages }} 
-        <li>
-          <a href=" {{ .Permalink }} ">
-            {{ .Title }} ({{ len .Pages }})
-          </a>
-        </li>
-      {{ end }}
-    </ul>
-  {{ end }}
+      
+      <!-- Render tag with enhanced styling -->
+      <span class="tag-cloud-word {{ $sizeClass }} {{ $finalWeight }} {{ $lightColor }} dark:{{ $darkColor }}"
+            data-count="{{ $count }}"
+            data-weight="{{ $logWeight }}"
+            data-index="{{ $tagIndex }}">
+        <a href="{{ "/tags/" | relLangURL }}{{ $name | urlize }}" 
+           class="tag-link"
+           title="{{ $name }} ({{ $count }} {{ if eq $count 1 }}post{{ else }}posts{{ end }})">
+          {{ $name }}
+        </a>
+      </span>
+      
+      {{ $tagIndex = add $tagIndex 1 }}
+    {{ end }}
+  </div>
 </section>
 
 {{ end }}
