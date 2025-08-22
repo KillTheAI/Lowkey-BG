@@ -4,13 +4,13 @@
     {{- partial "head/index" . -}}
   </head>
 
-  <body class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+  <body class="max-w-4xl mx-auto px-6 sm:px-8 lg:px-8">
     <div class="header">
       {{ partial "header/index" . }}
       {{ partial "header/theme-button" . }}
     </div>
   
-    <main id="content" class="max-w-3xl">
+    <main id="content" class="max-w-none">
       {{- block "main" . -}}
       {{- end }}
     </main>
