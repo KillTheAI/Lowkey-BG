@@ -5,4 +5,4 @@ type: taxonomies
 layout: "tags"
 ---
 
-Explore our content by tags. The size of each tag reflects how frequently it appears across our posts - larger tags indicate more content available on that topic.
+Explore our content by tags. The display format can be configured in `params.toml` - set `tagCloud = true` for an interactive word cloud where tag size reflects frequency, or `tagCloud = false` for a simple list view.

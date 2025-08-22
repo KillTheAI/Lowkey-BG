@@ -1,3 +1,6 @@
+# Example configuration with tag cloud disabled
+# This shows how to switch between word cloud and simple list views
+
 # Homepage Config
 isSinglePage = true
 
@@ -33,4 +36,4 @@ enableEmoji = true
     # lazyLoading = true
 
 # Tags Page Configuration
-tagCloud = true  # Set to true for word cloud, false for simple list
+tagCloud = false  # Set to true for word cloud, false for simple list
