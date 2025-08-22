@@ -3,8 +3,8 @@
 {{ $pages := .Pages }}
 {{ $paginator := .Paginate $pages }}
 
-<div class="flex flex-col gap-1">
-  <h1 class="text-2xl font-extrabold">
+<div class="flex flex-col gap-2 mb-12">
+  <h1 class="title-large">
     {{ if .Params.header }}
       {{ .Params.header }}
     {{ else }}
@@ -13,11 +13,13 @@
     </h1>
   
   {{ with .Content }}
-    {{ . }}
+    <div class="prose-enhanced">
+      {{ . }}
+    </div>
   {{ end }}
 </div>
 
-<section class="flex flex-col gap-10">
+<section class="flex flex-col gap-12">
   {{ range $index, $pages := $paginator.Pages }}
     {{ partial "list/default" . }}
   {{ end }}

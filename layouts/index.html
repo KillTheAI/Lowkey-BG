@@ -1,9 +1,9 @@
 {{ define "main" }} 
 
-<div class="py-2 flex flex-col gap-1">
-  <h3 class="title-small">{{ .Title }}</h3>
+<div class="py-4 flex flex-col gap-3 mb-8">
+  <h1 class="title-large">{{ .Title }}</h1>
 </div>
 
-    <section>{{ .Content }} </section>
+<section class="prose-enhanced">{{ .Content }}</section>
 
 {{ end }}

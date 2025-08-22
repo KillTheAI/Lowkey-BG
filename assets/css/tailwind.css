@@ -103,75 +103,138 @@
   }
 
   body {
-    @apply bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 text-lg text-justify;
+    @apply bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 text-lg leading-relaxed;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "ss01" 1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   
+  /* Enhanced heading typography with better spacing and visual hierarchy */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold text-gray-900 dark:text-gray-300 mb-5 pt-2;
+    @apply font-bold text-gray-900 dark:text-gray-100 mb-6 pt-3;
+    line-height: 1.25;
+    letter-spacing: -0.025em;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+    text-rendering: optimizeLegibility;
   }
   
   h1 {
-    @apply text-4xl leading-10;
+    @apply text-4xl leading-tight font-extrabold;
+    letter-spacing: -0.05em;
+    margin-top: 2rem;
   }
   
   h2 {
-    @apply text-3xl leading-10;
+    @apply text-3xl leading-tight font-bold;
+    letter-spacing: -0.04em;
+    margin-top: 1.75rem;
   }
   
   h3 {
-    @apply text-2xl;
+    @apply text-2xl leading-snug font-bold;
+    letter-spacing: -0.03em;
+    margin-top: 1.5rem;
   }
   
   h4 {
-    @apply text-xl;
+    @apply text-xl leading-snug font-semibold;
+    letter-spacing: -0.02em;
+    margin-top: 1.25rem;
   }
   
   h5 {
-    @apply text-lg;
+    @apply text-lg leading-snug font-semibold;
+    letter-spacing: -0.01em;
+    margin-top: 1rem;
   }
   
   h6 {
-    @apply text-base;
+    @apply text-base leading-normal font-semibold;
+    margin-top: 1rem;
   }
   
   hr {
     @apply border-gray-200 dark:border-gray-700;
   }
 
+  /* Enhanced paragraph and text typography */
   p, hr, pre, dl {
-    @apply mb-5 text-justify;
+    @apply mb-6;
+    line-height: 1.75;
+    hyphens: auto;
+    word-break: break-word;
+  }
+  
+  p {
+    text-align: left;
+    hanging-punctuation: first last;
+  }
+  
+  /* Improved text spacing and readability */
+  article p + p {
+    margin-top: 1.25rem;
   }
   
   article > h1 {
-    @apply mb-1;
+    @apply mb-2;
+    margin-top: 0;
   }
   
   code {
     @apply bg-gray-100 dark:bg-gray-800 rounded-lg text-sm border dark:border-gray-700 px-2 py-1;
+    font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+    font-feature-settings: "liga" 0;
   }
   
   pre {
     @apply rounded-lg border dark:border-gray-700 p-5 overflow-auto text-base;
+    line-height: 1.6;
   }
   
   pre code {
     @apply bg-transparent border-0 px-0;
+    font-size: 0.875rem;
   }
   
   figure {
-    @apply mb-5;
+    @apply mb-6;
   }
   
   figcaption {
-    @apply text-base text-gray-500 dark:text-gray-400 mt-2;
+    @apply text-base text-gray-500 dark:text-gray-400 mt-3;
+    font-style: italic;
+    text-align: center;
   }
   
+  /* Enhanced blockquote with better typography */
   blockquote {
-    @apply text-xl text-gray-500 dark:text-gray-400 italic border-l-4 border-gray-300 dark:border-gray-700 pl-4 mb-5;
+    @apply text-xl text-gray-600 dark:text-gray-300 italic border-l-4 border-gray-300 dark:border-gray-700 pl-6 mb-6;
+    line-height: 1.6;
+    font-weight: 400;
+    quotes: """ """ "'" "'";
   }
   
+  blockquote::before {
+    content: open-quote;
+    font-size: 1.5em;
+    line-height: 0;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
+  }
+  
+  blockquote::after {
+    content: close-quote;
+    font-size: 1.5em;
+    line-height: 0;
+    margin-left: 0.25em;
+    vertical-align: -0.4em;
+  }
+  
+  /* Enhanced list typography with better spacing */
   ul, ol {
-    @apply mb-5 ml-6;
+    @apply mb-6 ml-6;
+    line-height: 1.7;
   }
   
   ol {
@@ -180,6 +243,19 @@
   
   ul {
     @apply list-disc;
+  }
+  
+  li {
+    margin-bottom: 0.5rem;
+    line-height: 1.7;
+  }
+  
+  li > p {
+    margin-bottom: 0.75rem;
+  }
+  
+  li:last-child {
+    margin-bottom: 0;
   }
   
   nav ul, footer ul {
@@ -232,13 +308,22 @@
     @apply text-gray-900 dark:text-gray-100;
   }
   
-  /* Content overrides */
+  /* Content overrides with enhanced typography */
   #content {
-    @apply leading-normal;
+    @apply leading-relaxed;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
   }
 
   #content a {
-    @apply underline font-bold text-emerald-700 hover:text-emerald-600 dark:text-emerald-300 dark:hover:text-emerald-200;
+    @apply underline font-semibold text-emerald-700 hover:text-emerald-600 dark:text-emerald-300 dark:hover:text-emerald-200;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  #content a:hover {
+    text-decoration-thickness: 3px;
+    text-underline-offset: 2px;
   }
   
   #content .date {
@@ -349,9 +434,12 @@
     @apply list-none;
   }
 
-  /* Misc */
+  /* Enhanced typography for titles and headings */
   #site-title {
     @apply text-center sm:text-left text-4xl font-extrabold text-gray-800 dark:text-gray-100;
+    letter-spacing: -0.05em;
+    line-height: 1.2;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
   }
 
   .header {
@@ -363,10 +451,98 @@
   }
 
   .title-large {
-    @apply text-4xl leading-snug font-bold text-gray-900 dark:text-gray-300;
+    @apply text-4xl leading-tight font-extrabold text-gray-900 dark:text-gray-100;
+    letter-spacing: -0.05em;
+    line-height: 1.25;
+    margin-bottom: 1rem;
   }
 
   .title-small {
-    @apply text-2xl font-extrabold text-gray-900 dark:text-gray-300;
+    @apply text-2xl font-bold text-gray-900 dark:text-gray-100;
+    letter-spacing: -0.03em;
+    line-height: 1.3;
   }
+
+  /* Enhanced prose typography for article content */
+  .prose-enhanced {
+    max-width: none;
+  }
+
+  .prose-enhanced p {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+    text-align: left;
+    hyphens: auto;
+    word-break: break-word;
+    hanging-punctuation: first last;
+  }
+
+  .prose-enhanced p:last-child {
+    margin-bottom: 0;
+  }
+
+  .prose-enhanced p + h1,
+  .prose-enhanced p + h2,
+  .prose-enhanced p + h3,
+  .prose-enhanced p + h4,
+  .prose-enhanced p + h5,
+  .prose-enhanced p + h6 {
+    margin-top: 2.5rem;
+  }
+
+  .prose-enhanced strong {
+    font-weight: 600;
+    color: rgb(17 24 39 / 1);
+  }
+
+  .dark .prose-enhanced strong {
+    color: rgb(243 244 246 / 1);
+  }
+
+  .prose-enhanced em {
+    font-style: italic;
+    color: rgb(55 65 81 / 1);
+  }
+
+  .dark .prose-enhanced em {
+    color: rgb(209 213 219 / 1);
+  }
+
+  /* Enhanced table of contents typography */
+  #content .table-of-contents {
+    @apply bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300 p-6 border dark:border-gray-700 rounded-lg;
+    line-height: 1.6;
+  }
+
+  #content .table-of-contents #TableOfContents ul {
+    @apply list-decimal list-inside ml-4;
+    line-height: 1.7;
+  }
+
+  #content .table-of-contents #TableOfContents ul li {
+    @apply my-3 text-base;
+  }
+
+  #content .table-of-contents #TableOfContents ul li a {
+    @apply font-normal no-underline text-gray-700 dark:text-gray-300 hover:underline hover:text-emerald-600 dark:hover:text-emerald-200;
+    transition: all 0.2s ease-in-out;
+  }
+
+  /* Enhanced meta information typography */
+  #content .meta {
+    @apply text-sm font-medium text-gray-500 dark:text-gray-400 flex gap-3 mt-3;
+    line-height: 1.5;
+  }
+
+  #content .date {
+    @apply py-2 text-sm font-medium text-gray-500 dark:text-gray-400;
+    line-height: 1.5;
+  }
+
+  /* Enhanced description text */
+  #content .description {
+    @apply text-gray-600 dark:text-gray-300 text-base leading-relaxed;
+    line-height: 1.7;
+  }
+}
 }
