@@ -751,6 +751,197 @@
     color: rgb(107, 114, 128);
     font-weight: 400;
   }
+
+  /* Organic Word Cloud Container */
+  .tags-wordcloud-organic {
+    position: relative;
+    width: 100%;
+    min-height: 600px;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, 
+      rgba(248, 249, 250, 0.8) 0%, 
+      rgba(255, 255, 255, 0.9) 25%,
+      rgba(248, 249, 250, 0.7) 50%,
+      rgba(255, 255, 255, 0.9) 75%,
+      rgba(248, 249, 250, 0.8) 100%
+    );
+    border-radius: 1.5rem;
+    border: 1px solid rgba(229, 231, 235, 0.6);
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+  }
+
+  .dark .tags-wordcloud-organic {
+    background: linear-gradient(135deg, 
+      rgba(31, 41, 55, 0.8) 0%, 
+      rgba(17, 24, 39, 0.9) 25%,
+      rgba(31, 41, 55, 0.7) 50%,
+      rgba(17, 24, 39, 0.9) 75%,
+      rgba(31, 41, 55, 0.8) 100%
+    );
+    border-color: rgba(75, 85, 99, 0.6);
+  }
+
+  /* Individual Tag Elements */
+  .tag-organic {
+    position: relative;
+    display: inline-block;
+    margin: 0.5rem;
+    line-height: 0.9;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    transform-origin: center center;
+  }
+
+  .tag-organic:hover {
+    transform: scale(1.15) rotate(0deg) !important;
+    z-index: 100;
+    filter: brightness(1.2);
+  }
+
+  .tag-organic-link {
+    text-decoration: none;
+    display: block;
+    transition: all 0.3s ease;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 0.25rem;
+    padding: 0.1em 0.2em;
+  }
+
+  .tag-organic-link:hover {
+    text-decoration: none;
+    background: rgba(59, 130, 246, 0.15);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+  }
+
+  .dark .tag-organic-link:hover {
+    background: rgba(59, 130, 246, 0.25);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  }
+
+  /* Organic positioning variations */
+  .tag-organic:nth-child(2n) {
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .tag-organic:nth-child(3n) {
+    margin-top: 0.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .tag-organic:nth-child(4n) {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .tag-organic:nth-child(5n) {
+    margin-top: 0.75rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .tag-organic:nth-child(6n) {
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tag-organic:nth-child(7n) {
+    margin-top: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  /* Add subtle animations */
+  .tag-organic:nth-child(odd) {
+    animation: float-gentle 8s ease-in-out infinite;
+  }
+
+  .tag-organic:nth-child(even) {
+    animation: float-gentle 8s ease-in-out infinite reverse;
+  }
+
+  @keyframes float-gentle {
+    0%, 100% {
+      transform: translateY(0px) rotate(var(--rotation, 0deg));
+    }
+    50% {
+      transform: translateY(-3px) rotate(var(--rotation, 0deg));
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .tags-wordcloud-organic {
+      padding: 2rem 1rem;
+      min-height: 400px;
+    }
+    
+    .tag-organic {
+      margin: 0.25rem;
+    }
+    
+    /* Scale down large text on mobile */
+    .tag-organic-link {
+      font-size: min(1em, 8vw) !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .tags-wordcloud-organic {
+      padding: 1.5rem 0.75rem;
+      min-height: 350px;
+    }
+    
+    .tag-organic {
+      margin: 0.2rem;
+    }
+    
+    .tag-organic-link {
+      font-size: min(1em, 6vw) !important;
+    }
+  }
+
+  /* Color-specific hover effects */
+  .text-blue-600:hover, .dark .text-blue-400:hover {
+    color: rgb(37, 99, 235) !important;
+  }
+  
+  .text-green-600:hover, .dark .text-green-400:hover {
+    color: rgb(22, 163, 74) !important;
+  }
+  
+  .text-purple-600:hover, .dark .text-purple-400:hover {
+    color: rgb(147, 51, 234) !important;
+  }
+  
+  .text-red-600:hover, .dark .text-red-400:hover {
+    color: rgb(220, 38, 38) !important;
+  }
+
+  .text-yellow-600:hover, .dark .text-yellow-400:hover {
+    color: rgb(202, 138, 4) !important;
+  }
+
+  .text-indigo-600:hover, .dark .text-indigo-400:hover {
+    color: rgb(79, 70, 229) !important;
+  }
+
+  .text-pink-600:hover, .dark .text-pink-400:hover {
+    color: rgb(219, 39, 119) !important;
+  }
+
+  .text-orange-600:hover, .dark .text-orange-400:hover {
+    color: rgb(234, 88, 12) !important;
+  }
+
+  .text-teal-600:hover, .dark .text-teal-400:hover {
+    color: rgb(13, 148, 136) !important;
+  }
   
   .dark #content .description {
     color: rgb(156, 163, 175);
